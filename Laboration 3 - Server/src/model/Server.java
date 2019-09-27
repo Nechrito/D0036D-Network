@@ -3,7 +3,7 @@ package model;
 import java.io.IOException;
 import java.net.*;
 
-public class Server extends Thread
+public class Server
 {
     private DatagramSocket socket;
     private byte[] buffer;
@@ -35,10 +35,5 @@ public class Server extends Thread
         {
             e.printStackTrace();
         }
-    }
-
-    public void run()
-    {
-        // todo
     }
 }

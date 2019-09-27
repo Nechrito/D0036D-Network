@@ -25,7 +25,6 @@ public class Controller extends JFrame
         setVisible(true);
 
         Server server = new Server();
-        server.start();
 
         button1.addActionListener(actionEvent -> server.SendMessage("SET_ALL_RANDOM"));
         button2.addActionListener(actionEvent -> server.SendMessage("SET_ALL_WHITE"));
