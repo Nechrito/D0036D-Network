@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="All Places" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b0672c82-f448-4c05-8e81-f1ce332f5e57" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Laboration2" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1QxligIitkZdJR5dODWWWKH3Kn4" />
+  <component name="PropertiesComponent">
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="228" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/swing" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\philar-8-local\Desktop\Laboration2\src\resources" />
+      <recent name="C:\Users\philar-8-local\Desktop\Laboration2\src" />
+      <recent name="D:\Programming\IdeaProjects\Laboration2\src\gui" />
+      <recent name="D:\Programming\IdeaProjects\Laboration2\src\gui\view" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\philar-8-local\Desktop\Laboration2\src\resources" />
+      <recent name="D:\Programming\IdeaProjects\Laboration2\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Laboration2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0672c82-f448-4c05-8e81-f1ce332f5e57" name="Default Changelist" comment="" />
+      <created>1568720256725</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1568720256725</updated>
+      <workItem from="1568720260213" duration="19737000" />
+      <workItem from="1568746847229" duration="20735000" />
+      <workItem from="1568794809375" duration="778000" />
+      <workItem from="1568803524206" duration="22574000" />
+      <workItem from="1568831709106" duration="11000" />
+      <workItem from="1568831755726" duration="26000" />
+      <workItem from="1568831810015" duration="11401000" />
+      <workItem from="1568886456982" duration="4545000" />
+      <workItem from="1568895271870" duration="33901000" />
+      <workItem from="1569262113367" duration="4190000" />
+      <workItem from="1569266951025" duration="896000" />
+      <workItem from="1569268333271" duration="215000" />
+      <workItem from="1569268593122" duration="1202000" />
+      <workItem from="1569269832907" duration="637000" />
+      <workItem from="1569276589250" duration="1875000" />
+      <workItem from="1569327163996" duration="15000" />
+      <workItem from="1569496235536" duration="1096000" />
+      <workItem from="1569586684190" duration="314000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
