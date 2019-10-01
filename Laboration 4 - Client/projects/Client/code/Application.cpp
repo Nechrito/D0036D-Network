@@ -10,7 +10,7 @@ bool Application::Open()
 	// window override config
 	this->window = new Display::Window;
 	this->window->SetSize(width, height);
-	this->window->SetTitle("Server");
+	this->window->SetTitle("Titel");
 
 	return this->window->Open();
 }
@@ -31,9 +31,6 @@ void Application::Run()
 		// Time between current and previous frame, useful to limit movement as compute speed differs with unlocked frame-rate
 		deltaTime = float(currentTime - lastFrame);
 		lastFrame = currentTime;
-
-
-		
 		
 		// swap buffers 
 		this->window->SwapBuffers();

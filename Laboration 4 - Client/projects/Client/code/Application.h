@@ -8,10 +8,10 @@ class Application : public Core::App
 public:
 	Application() : window(nullptr) { }
 
-	bool Open()  override;
-	void Run()   override;
+	bool Open() override;
+	void Run() override;
 	void Close() override;
-	void Exit()  override;
+	void Exit() override;
 
 	~Application() = default;
 	
