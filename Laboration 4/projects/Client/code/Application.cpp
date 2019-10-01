@@ -1,7 +1,6 @@
 #include "config.h"
 #include "Application.h"
 #include <iostream>
-#include "Listener.h"
 
 bool Application::Open()
 {
@@ -11,7 +10,7 @@ bool Application::Open()
 	// window override config
 	this->window = new Display::Window;
 	this->window->SetSize(width, height);
-	this->window->SetTitle("Server");
+	this->window->SetTitle("Client");
 
 	this->window->SetKeyPressFunction([this](int, const int button, const int action, int)
 	{
@@ -24,8 +23,6 @@ bool Application::Open()
 
 void Application::Run()
 {
-	Listener listener;
-
 	while (this->window->IsOpen())
 	{
 		// Clear screen
