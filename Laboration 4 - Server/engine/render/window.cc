@@ -14,7 +14,6 @@
 
 namespace Display
 {
-
 	#ifdef __WIN32__
 	#define APICALLTYPE __stdcall
 	#else

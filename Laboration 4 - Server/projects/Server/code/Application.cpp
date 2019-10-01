@@ -12,6 +12,12 @@ bool Application::Open()
 	this->window->SetSize(width, height);
 	this->window->SetTitle("Server");
 
+	this->window->SetKeyPressFunction([this](int, const int button, const int action, int)
+	{
+		if (action == 1 && button == 1)
+			this->window->Close();
+	});
+
 	return this->window->Open();
 }
 
