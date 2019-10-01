@@ -12,22 +12,7 @@ bool Application::Open()
 	this->window->SetSize(width, height);
 	this->window->SetTitle("Titel");
 
-	this->window->SetMouseMoveFunction([this](const float x, const float y)
-	{
-		
-	});
-
-	this->window->SetKeyPressFunction([this](int, const int button, const int action, int)
-	{
-		
-	});
-
 	return this->window->Open();
-}
-
-void Application::KeyboardInput()
-{
-	
 }
 
 void Application::Run()
@@ -44,12 +29,8 @@ void Application::Run()
 		const auto currentTime = float(glfwGetTime());
 
 		// Time between current and previous frame, useful to limit movement as compute speed differs with unlocked frame-rate
-		// Can also be used for timers
 		deltaTime = float(currentTime - lastFrame);
 		lastFrame = currentTime;
-
-		// Keyboard input
-		KeyboardInput();
 		
 		// swap buffers 
 		this->window->SwapBuffers();
