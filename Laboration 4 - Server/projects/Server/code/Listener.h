@@ -30,7 +30,7 @@ public:
 	
 	void AcceptPacket();
 
-	void Close();
+	void Close() const;
 	
 	~Listener() = default;
 };

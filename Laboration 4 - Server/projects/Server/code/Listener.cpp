@@ -3,6 +3,8 @@
 
 Listener::Listener()
 {
+	printf("Setting up sockets...\n");
+	
 	// Initializes the Winsock API at version 2.2 
 	int result = WSAStartup(MAKEWORD(2, 2), &wsadata);
 	if (result != 0)
@@ -59,10 +61,8 @@ Listener::Listener()
 		WSACleanup();
 		return;
 	}
-
 	
-	
-	printf("Created the socket");
+	printf("Initialized successfully!\n\n");
 }
 
 void Listener::Update()
@@ -94,13 +94,7 @@ void Listener::Update()
 	}
 }
 
-
-void Listener::AcceptPacket()
-{
-	
-}
-
-void Listener::Close()
+void Listener::Close() const
 {
 	if (shutdown(ClientSocket, SD_SEND) == SOCKET_ERROR)
 	{

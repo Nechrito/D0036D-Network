@@ -1,13 +1,18 @@
 #include "Listener.h"
+#include "Input.h"
 #include <thread>
 
 int main()
 {
 	Listener listener;
-	std::thread threadObj(&Listener::Update, listener);
-
-	if (threadObj.joinable())
-		threadObj.join();
-
+	Input input;
 	
+	std::thread threadListener(&Listener::Update, listener);
+	std::thread threadInput(&Input::Update, input);
+	
+	if (threadListener.joinable())
+		threadListener.join();
+
+	if (threadInput.joinable())
+		threadInput.join();
 }
