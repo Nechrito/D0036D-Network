@@ -1,6 +1,5 @@
-#ifndef WIN32_LEAN_AND_MEAN
+#pragma once
 #define WIN32_LEAN_AND_MEAN
-#endif
 
 #include <windows.h>
 #include <winsock2.h>
@@ -8,29 +7,33 @@
 #include <iphlpapi.h>
 #include <stdio.h>
 
+#include "ClientSocket.h"
+#include <vector>
+
 #pragma comment(lib, "Ws2_32.lib")
 
 constexpr auto PORT = "49153";
+constexpr auto IP = "130.240.40.7"; 
 
-class Listener
+class WinsockServer
 {
 private:
-	WSADATA wsadata;
 	
-	struct addrinfo* addressInfo = nullptr, *ptr = nullptr, socketAddress;
+	struct addrinfo hints;
+	struct addrinfo* address;
 	
 	SOCKET ServerSocket = INVALID_SOCKET; 
-	SOCKET ClientSocket = INVALID_SOCKET; // Manages connections from external clients
-
+	//std::vector<ClientSocket> clients; 
+	
+	void AllowConnections();
+	
 public:
 
-	Listener();
+	WinsockServer();
 
 	void Update();
 	
-	void AcceptPacket();
-
 	void Close() const;
 	
-	~Listener() = default;
+	~WinsockServer() = default;
 };

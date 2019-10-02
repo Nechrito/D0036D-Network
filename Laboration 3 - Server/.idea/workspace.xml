@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa471c43-fea6-4a90-9153-69b37c42d15e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Laboration 3 - Client/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Laboration 3 - Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 3 - Client/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laboration 3 - Server/model/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laboration 3 - Server/model/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laboration 3 - Server/view/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laboration 3 - Server/view/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Listener.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Listener.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Server.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +31,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laboration 3 - Client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunDashboard">
@@ -78,6 +77,8 @@
       <workItem from="1569408214025" duration="6344000" />
       <workItem from="1569535080381" duration="121000" />
       <workItem from="1569589464808" duration="216000" />
+      <workItem from="1570017544276" duration="67000" />
+      <workItem from="1570018286870" duration="37000" />
     </task>
     <servers />
   </component>
@@ -89,7 +90,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

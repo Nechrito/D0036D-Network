@@ -1,13 +1,13 @@
-#include "Listener.h"
+#include "WinsockServer.h"
 #include "Input.h"
 #include <thread>
 
 int main()
 {
-	Listener listener;
+	WinsockServer server;
 	Input input;
 	
-	std::thread threadListener(&Listener::Update, listener);
+	std::thread threadListener(&WinsockServer::Update, server);
 	std::thread threadInput(&Input::Update, input);
 	
 	if (threadListener.joinable())

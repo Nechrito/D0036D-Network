@@ -66,7 +66,6 @@ public class Game
 
     private void init()
     {
-        List<Vector2> spots = new ArrayList<>();
         layout.clear();
 
         for (int x = 0; x < quadCount; x ++)
@@ -74,18 +73,14 @@ public class Game
             for (int y = 0; y < quadCount; y++)
             {
                 Vector2 spot = new Vector2(-1.0f + x * quadSize, -1.0f + y * quadSize);
-                spots.add(spot);
+                Color color = GenerateColor(random.nextInt(8));
+
+                layout.add(new Grid(color, spot));
             }
         }
 
-        System.out.println("Grid Size: " + spots.size());
+        System.out.println("Grid Size: " + layout.size());
 
-        for (Vector2 v2 : spots)
-        {
-            Color color = GenerateColor(random.nextInt(8));
-
-            layout.add(new Grid(color, v2));
-        }
         this.isRefreshing = false;
     }
 
