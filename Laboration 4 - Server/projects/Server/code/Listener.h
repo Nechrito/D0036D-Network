@@ -27,6 +27,7 @@ public:
 	Listener();
 
 	void Update();
+	
 	void AcceptPacket();
 
 	void Close();

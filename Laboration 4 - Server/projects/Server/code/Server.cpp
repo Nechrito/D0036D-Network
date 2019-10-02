@@ -1,14 +1,13 @@
-#include "config.h"
-#include "Application.h"
+#include "Listener.h"
+#include <thread>
 
 int main()
 {
-	Application app;
+	Listener listener;
+	std::thread threadObj(&Listener::Update, listener);
 
-	if (app.Open())
-	{
-		app.Run();
-		app.Close();
-	}
-	app.Exit();
+	if (threadObj.joinable())
+		threadObj.join();
+
+	
 }
