@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="842b4506-2dc8-4880-9576-a5bc23980f80" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laboration 3 - Client/model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laboration 3 - Client/model/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Laboration 3 - Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 3 - Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 4 - Client/projects/Client/code/Application.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Listener.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Listener.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Laboration 4 - Server/projects/Server/code/Server.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +81,7 @@
       <workItem from="1569535087703" duration="114000" />
       <workItem from="1569589476819" duration="48000" />
       <workItem from="1570016876295" duration="733000" />
-      <workItem from="1570018321474" duration="4089000" />
+      <workItem from="1570018321474" duration="4755000" />
     </task>
     <servers />
   </component>

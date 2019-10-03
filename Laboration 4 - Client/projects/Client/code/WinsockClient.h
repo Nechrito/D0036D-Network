@@ -20,12 +20,15 @@ private:
 
 	SOCKET ClientSocket = INVALID_SOCKET; // our socket which connects to the server
 	struct addrinfo hints; // contains properties for our connection
-	struct addrinfo* addressInfo; // retrieves data used to assign the socket 
+	struct addrinfo* addressInfo; // retrieves data used to assign the socket
+	struct sockaddr_in serverAddr, senderInfo;
 	
 public:
 
 	WinsockClient();
 
+	bool ConnectToServer();
+	
 	void SendCommand();
 	
 	void Update();

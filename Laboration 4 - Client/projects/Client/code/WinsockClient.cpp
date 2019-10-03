@@ -2,17 +2,22 @@
 
 WinsockClient::WinsockClient()
 {
+	
+}
+
+bool WinsockClient::ConnectToServer()
+{
 	WSADATA wsaData;
 	int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (result)
 	{
 		printf("[WSAStartup] Error: %d\n", result);
-		return;
+		return false;
 	}
 
 	ZeroMemory(&hints, sizeof hints);
-	hints.ai_family = AF_UNSPEC; 
-	hints.ai_socktype = SOCK_STREAM; 
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
 	// assigns the ip & port
@@ -21,7 +26,7 @@ WinsockClient::WinsockClient()
 	{
 		printf("[getaddrinfo] Error: %d\n", result);
 		WSACleanup();
-		return;
+		return false;
 	}
 
 	// iterates through possible addresses with the attempt to connect with one of them
@@ -33,7 +38,7 @@ WinsockClient::WinsockClient()
 		{
 			printf("[Socket] Error: %d\n", result);
 			WSACleanup();
-			return;
+			return false;
 		}
 
 		// attempts to connect to the server
@@ -56,10 +61,11 @@ WinsockClient::WinsockClient()
 	{
 		printf("[Connection] Error: %d\n", result);
 		WSACleanup();
-		return;
+		return false;
 	}
 
 	printf("Sucessfully connected to the server!\n");
+	return true;
 }
 
 void WinsockClient::Update()
