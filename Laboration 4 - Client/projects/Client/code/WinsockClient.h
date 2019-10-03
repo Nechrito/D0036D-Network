@@ -11,8 +11,7 @@
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-constexpr auto PORT = "49153";
-constexpr auto IP = "130.240.40.7";
+constexpr auto IP = "130.240.40.7"; // 130.240.40.63 ?
 
 class WinsockClient
 {
@@ -23,9 +22,11 @@ private:
 	struct addrinfo* addressInfo; // retrieves data used to assign the socket
 	struct sockaddr_in serverAddr, senderInfo;
 	
+	unsigned int PORT = 49153;
+	
 public:
 
-	WinsockClient();
+	WinsockClient() = default;
 
 	bool ConnectToServer();
 	
