@@ -14,7 +14,7 @@ bool Application::Open()
 
 	this->window->SetKeyPressFunction([this](int, const int button, const int action, int)
 	{
-		if (action != 1)
+		if (action == 0)
 			return;
 		
 		switch (button)
@@ -22,16 +22,16 @@ bool Application::Open()
 			case 1: this->window->Close(); break;
 			
 			case 17:
-				
+				this->player.Position.Y += playerSpeed;
 				break;
 			case 30:
-				
+				this->player.Position.X -= playerSpeed;
 				break;
 			case 31:
-				
+				this->player.Position.Y -= playerSpeed;
 				break;
 			case 32:
-				
+				this->player.Position.X += playerSpeed;
 				break;
 		}
 	});
@@ -139,7 +139,8 @@ Color Application::GenerateColor()
 	for (int i = 0; i < 3; i++)
 	{
 		//temp[i] = (float)rand() / RAND_MAX;
-		temp[i] = 0.125f; 
+		temp[i] = col;
+		col -= 0.0005f;
 	}
 	return temp;
 }

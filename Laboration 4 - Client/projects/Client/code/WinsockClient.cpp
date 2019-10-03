@@ -37,12 +37,21 @@ bool WinsockClient::ConnectToServer()
 	}
 	
 	printf("Sucessfully connected to the server!\n\n");
-	return true;
-}
 
-void WinsockClient::SendCommand()
-{
+	int numbytes;
+	const int size = 512;
+	char buf[size];
+	if ((numbytes = recv(ClientSocket, buf, size - 1, 0)) == -1)
+	{
+		perror("recv");
+		exit(1);
+	}
+
+	buf[numbytes] = '\0';
+	printf("Received '%s'\n", buf);
 	
+	
+	return true;
 }
 
 void WinsockClient::Update()

@@ -38,7 +38,10 @@ private:
 	int quadCount;
 	float quadSize;
 	bool isRefreshing;
-	Layout player;
 	
-	static Color GenerateColor();
+	Layout player;
+	float playerSpeed = 0.05f;
+	float col = 0.65;
+	
+	Color GenerateColor();
 };

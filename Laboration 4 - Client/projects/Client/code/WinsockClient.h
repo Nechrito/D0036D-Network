@@ -6,12 +6,13 @@
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
 #include <cstdio>
+#include <string>
 
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-constexpr auto IP = "130.240.40.7"; // 130.240.40.63 ?
+constexpr auto IP = "130.240.40.7"; 
 
 class WinsockClient
 {
@@ -30,7 +31,6 @@ public:
 
 	bool ConnectToServer();
 	
-	void SendCommand();
 	
 	void Update();
 
