@@ -28,7 +28,7 @@ bool WinsockClient::ConnectToServer()
 	printf("%s\n", str);
 
 	result = connect(ClientSocket, (sockaddr*)&serverAddr, sizeof serverAddr);
-	if (result != 0)
+	if (result)
 	{
 		printf("[getaddrinfo] Error: %d\n", WSAGetLastError());
 		WSACleanup();
@@ -36,8 +36,6 @@ bool WinsockClient::ConnectToServer()
 		return false;
 	}
 	
-	printf("Sucessfully connected to the server!\n\n");
-
 	int numbytes;
 	const int size = 512;
 	char buf[size];
