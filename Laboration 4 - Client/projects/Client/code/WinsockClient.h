@@ -7,6 +7,7 @@
 #include <iphlpapi.h>
 #include <cstdio>
 #include <string>
+#include "Vector2D.h"
 
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
@@ -24,18 +25,16 @@ private:
 	struct sockaddr_in serverAddr, senderInfo;
 	
 	unsigned int PORT = 49153;
-	
+
 public:
 
 	WinsockClient() = default;
 
 	bool ConnectToServer();
-	
-	
-	void Update();
-
 	void Close() const;
 
+	void RequestMove(Vector2D pos, Vector2D dir);
+	
 	~WinsockClient() = default;
 	
 };

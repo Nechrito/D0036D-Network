@@ -4,6 +4,11 @@
 
 bool Application::Open()
 {
+	if (!winsockClient.ConnectToServer())
+	{
+		return false;
+	}
+	
 	// start app
 	App::Open();
 
@@ -22,20 +27,24 @@ bool Application::Open()
 			case 1: this->window->Close(); break;
 			
 			case 17:
+				winsockClient.RequestMove(player.Position, Vector2D(0, playerSpeed));
 				this->player.Position.Y += playerSpeed;
 				break;
 			case 30:
+				winsockClient.RequestMove(player.Position, Vector2D(-playerSpeed, 0));
 				this->player.Position.X -= playerSpeed;
 				break;
 			case 31:
+				winsockClient.RequestMove(player.Position, Vector2D(0, -playerSpeed));
 				this->player.Position.Y -= playerSpeed;
 				break;
 			case 32:
+				winsockClient.RequestMove(player.Position, Vector2D(playerSpeed, 0));
 				this->player.Position.X += playerSpeed;
 				break;
 		}
 	});
-
+	
 	return this->window->Open();
 }
 

@@ -3,7 +3,7 @@
 #define MAXNAMELEN 32
 
 /// Enums & constants
-enum ObjectDesc
+enum class ObjectDesc
 {
 	Human,
 	NonHuman,
@@ -11,7 +11,7 @@ enum ObjectDesc
 	StaticObject
 };
 
-enum ObjectForm
+enum class ObjectForm
 {
 	Cube,
 	Sphere,
@@ -25,7 +25,7 @@ struct Coordinate
 	int y;
 };
 
-enum MsgType
+enum class MsgType
 {
 	Join, // Client joining game at server
 	Leave, // Client leaving game
@@ -55,7 +55,7 @@ struct LeaveMsg
 {
 	MsgHead head;
 };
-enum EventType
+enum class EventType
 {
 	Move
 };
@@ -65,16 +65,17 @@ struct EventMsg
 	MsgHead head;
 	EventType type;
 };
+#pragma pack(1)
 struct MoveEvent
 {
 	EventMsg event;
 	Coordinate pos; //New object position
 	Coordinate dir; //New object direction
 };
-
+#pragma pack(0)
 
 /// Server -> Client 
-enum ChangeType
+enum class ChangeType
 {
 	NewPlayer,
 	PlayerLeave,

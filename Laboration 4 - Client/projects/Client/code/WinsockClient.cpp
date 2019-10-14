@@ -1,4 +1,6 @@
 #include "WinsockClient.h"
+#include "CProtocol.h"
+#include "Vector2D.h"
 
 bool WinsockClient::ConnectToServer()
 {
@@ -52,13 +54,29 @@ bool WinsockClient::ConnectToServer()
 	return true;
 }
 
-void WinsockClient::Update()
-{
-	
-}
-
 void WinsockClient::Close() const
 {
 	closesocket(ClientSocket);
 	WSACleanup();
+}
+
+void WinsockClient::RequestMove(Vector2D pos, Vector2D dir)
+{
+	MsgHead head = {  };
+	EventType type = {EventType::Move };
+	EventMsg msg = { head, type };
+
+	int posX = int(pos.X);
+	int posY = int(pos.Y);
+	Coordinate cPos = { posX, posY};
+
+	int dirX = int(dir.X);
+	int dirY = int(dir.Y);
+	Coordinate cDir = { dirX, dirY };
+	
+	MoveEvent event = { msg, cPos, cDir };
+
+	char* buf = new char[sizeof event];
+	memcpy(&buf, &event, sizeof event);
+	send(ClientSocket, buf, sizeof buf, 0);
 }

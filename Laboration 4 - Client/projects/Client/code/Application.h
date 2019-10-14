@@ -4,6 +4,7 @@
 #include "render/window.h"
 #include <vector>
 #include "Layout.h"
+#include "WinsockClient.h"
 
 class Application : public Core::App
 {
@@ -26,6 +27,7 @@ public:
 private:
 
 	Display::Window* window;
+	WinsockClient winsockClient;
 	
 	float width = 1024;
 	float height = 720;
