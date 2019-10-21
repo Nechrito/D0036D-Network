@@ -62,8 +62,11 @@ void WinsockClient::Close() const
 
 void WinsockClient::RequestMove(Vector2D pos, Vector2D dir)
 {
-	MsgHead head = {  };
-	EventType type = {EventType::Move };
+	MsgHead head = 
+	{
+		
+	};
+	EventType type = { EventType::Move };
 	EventMsg msg = { head, type };
 
 	int posX = int(pos.X);
@@ -79,4 +82,6 @@ void WinsockClient::RequestMove(Vector2D pos, Vector2D dir)
 	char* buf = new char[sizeof event];
 	memcpy(&buf, &event, sizeof event);
 	send(ClientSocket, buf, sizeof buf, 0);
+
+	delete[] buf;
 }
