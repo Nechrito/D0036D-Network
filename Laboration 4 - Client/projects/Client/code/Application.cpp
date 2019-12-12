@@ -2,13 +2,19 @@
 #include "Application.h"
 #include <iostream>
 
+Application::Application(): window(nullptr)
+{
+	this->player = Layout(Color(1, 1, 1), Vector2D(-1 / quadSize, -1 / quadSize));
+	this->quadSize = 2.0f / float(quadCount);
+}
+
 bool Application::Open()
 {
 	if (!winsockClient.ConnectToServer())
 	{
 		return false;
 	}
-	
+
 	// start app
 	App::Open();
 
@@ -21,39 +27,38 @@ bool Application::Open()
 	{
 		if (action == 0)
 			return;
-		
+
 		switch (button)
 		{
 			case 1: this->window->Close(); break;
-			
+
 			case 17:
-				winsockClient.RequestMove(player.Position, Vector2D(0, playerSpeed));
+				winsockClient.RequestMove(player.Position, Vector2D(0.0f, playerSpeed));
 				this->player.Position.Y += playerSpeed;
 				break;
 			case 30:
-				winsockClient.RequestMove(player.Position, Vector2D(-playerSpeed, 0));
+				winsockClient.RequestMove(player.Position, Vector2D(-playerSpeed, 0.0f));
 				this->player.Position.X -= playerSpeed;
 				break;
 			case 31:
-				winsockClient.RequestMove(player.Position, Vector2D(0, -playerSpeed));
+				winsockClient.RequestMove(player.Position, Vector2D(0.0f, -playerSpeed));
 				this->player.Position.Y -= playerSpeed;
 				break;
 			case 32:
-				winsockClient.RequestMove(player.Position, Vector2D(playerSpeed, 0));
+				winsockClient.RequestMove(player.Position, Vector2D(playerSpeed, 0.0f));
 				this->player.Position.X += playerSpeed;
 				break;
 		}
 	});
-	
+
 	return this->window->Open();
 }
 
 void Application::Run()
 {
-	quadCount = 20;
-	quadSize = 2.0f / quadCount;
-	ConfigureQuads();
-	
+
+	RefreshTiles();
+
 	while (this->window->IsOpen())
 	{
 		// Clear screen
@@ -72,12 +77,12 @@ void Application::Run()
 		if (!isRefreshing)
 		{
 			glBegin(GL_QUADS);
-			
+
 			for (const Layout& layout : tiles)
 			{
 				Color color = layout.QuadColor;
 				Vector2D pos = layout.Position;
-				
+
 				glColor3f(color.R, color.G, color.B);
 
 				glVertex2f(pos.X, pos.Y);
@@ -99,14 +104,11 @@ void Application::Run()
 
 			glEnd();
 		}
-		
+
 		// swap buffers 
 		this->window->SwapBuffers();
 	}
 }
-
-void Application::Close() { }
-void Application::Exit() { }
 
 void Application::ReceiveCommand(const std::string& command)
 {
@@ -115,24 +117,24 @@ void Application::ReceiveCommand(const std::string& command)
 		// fetch the position 
 		return;
 	}
-	
+
 	double quads = std::stod(command);
 	this->quadCount = (int)quads;
-	this->quadSize = 2.0f / quadCount;
+	this->quadSize = 2.0f / float(quadCount);
 	this->isRefreshing = true;
 }
 
-void Application::ConfigureQuads()
+void Application::RefreshTiles()
 {
 	tiles.clear();
-	
+
 	for (int x = 0; x < quadCount; x++)
 	{
 		for (int y = 0; y < quadCount; y++)
 		{
-			Vector2D position(-1.0f + x * quadSize, -1.0f + y * quadSize);
+			Vector2D position(-1 + x * quadSize, -1 + y * quadSize);
 			Color randomColor = GenerateColor();
-			
+
 			tiles.emplace_back(randomColor, position);
 		}
 	}

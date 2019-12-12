@@ -37,7 +37,7 @@ bool WinsockClient::ConnectToServer()
 		closesocket(ClientSocket);
 		return false;
 	}
-	
+
 	int numbytes;
 	const int size = 512;
 	char buf[size];
@@ -49,8 +49,8 @@ bool WinsockClient::ConnectToServer()
 
 	buf[numbytes] = '\0';
 	printf("Received '%s'\n", buf);
-	
-	
+
+
 	return true;
 }
 
@@ -62,21 +62,21 @@ void WinsockClient::Close() const
 
 void WinsockClient::RequestMove(Vector2D pos, Vector2D dir)
 {
-	MsgHead head = 
+	MsgHead head =
 	{
-		
+
 	};
 	EventType type = { EventType::Move };
 	EventMsg msg = { head, type };
 
 	int posX = int(pos.X);
 	int posY = int(pos.Y);
-	Coordinate cPos = { posX, posY};
+	Coordinate cPos = { posX, posY };
 
 	int dirX = int(dir.X);
 	int dirY = int(dir.Y);
 	Coordinate cDir = { dirX, dirY };
-	
+
 	MoveEvent event = { msg, cPos, cDir };
 
 	char* buf = new char[sizeof event];

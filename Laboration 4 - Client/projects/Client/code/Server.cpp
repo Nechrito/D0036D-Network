@@ -4,7 +4,7 @@
 int main()
 {
 	Application app;
-	
+
 	if (app.Open())
 	{
 		app.Run();

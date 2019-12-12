@@ -9,7 +9,7 @@ public:
 	Vector2D Position;
 
 	Layout() = default;
-	
+
 	Layout(Color color, const Vector2D& position)
 	{
 		this->QuadColor = color;

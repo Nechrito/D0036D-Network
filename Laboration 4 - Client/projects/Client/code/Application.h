@@ -6,22 +6,19 @@
 #include "Layout.h"
 #include "WinsockClient.h"
 
-class Application : public Core::App
+class Application final : public Core::App
 {
 public:
-	Application() : window(nullptr)
-	{
-		this->player = Layout(Color(1, 1, 1), Vector2D(0.0f - 1 / quadSize, 0.0f - 1 / quadSize));
-	}
+	Application();
 
 	bool Open()  override;
 	void Run()   override;
-	void Close() override;
-	void Exit()  override;
+	void Close() override {}
+	void Exit()  override {}
 
 	void ReceiveCommand(const std::string& command);
-	void ConfigureQuads();
-
+	void RefreshTiles();
+	
 	~Application() = default;
 	
 private:
@@ -37,13 +34,13 @@ private:
 
 	// game-related
 	std::vector<Layout> tiles;
-	int quadCount;
-	float quadSize;
-	bool isRefreshing;
+	int quadCount = 20;
+	float quadSize = 0;
+	bool isRefreshing = false;
 	
 	Layout player;
 	float playerSpeed = 0.05f;
 	float col = 0.65;
-	
+
 	Color GenerateColor();
 };
