@@ -2,10 +2,12 @@
 #include "Application.h"
 #include <iostream>
 
-Application::Application(): window(nullptr)
+Application::Application() : window(nullptr)
 {
-	this->player = Layout(Color(1, 1, 1), Vector2D(-1 / quadSize, -1 / quadSize));
+	this->player = Layout(Color(0.24, 1, 1), Vector2D(-1 / quadSize, -1 / quadSize));
+	this->quadCount = 20;
 	this->quadSize = 2.0f / float(quadCount);
+	this->isRefreshing = false;
 }
 
 bool Application::Open()
@@ -59,7 +61,7 @@ void Application::Run()
 
 	RefreshTiles();
 
-	while (this->window->IsOpen())
+	while (window->IsOpen())
 	{
 		// Clear screen
 		glClearColor(0.1f, 0.1f, 0.1f, 0.1f);

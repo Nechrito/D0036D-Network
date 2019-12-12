@@ -34,9 +34,9 @@ private:
 
 	// game-related
 	std::vector<Layout> tiles;
-	int quadCount = 20;
-	float quadSize = 0;
-	bool isRefreshing = false;
+	int quadCount;
+	float quadSize;
+	bool isRefreshing;
 	
 	Layout player;
 	float playerSpeed = 0.05f;
