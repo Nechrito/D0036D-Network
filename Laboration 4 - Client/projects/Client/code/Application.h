@@ -18,6 +18,8 @@ public:
 
 	void ReceiveCommand(const std::string& command);
 	void RefreshTiles();
+
+	void SetMovePos(Vector2& pos) { this->player.Position = pos; }
 	
 	~Application() = default;
 	

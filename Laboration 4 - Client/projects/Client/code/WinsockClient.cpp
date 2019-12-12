@@ -1,6 +1,7 @@
 #include "WinsockClient.h"
 #include "CProtocol.h"
-#include "Vector2D.h"
+#include "Vector2.h"
+#include <iostream>
 
 bool WinsockClient::ConnectToServer()
 {
@@ -12,7 +13,13 @@ bool WinsockClient::ConnectToServer()
 		return false;
 	}
 
+	
 	ClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	
+	int opt_val = 1;
+	int opt_len = sizeof(int);
+	setsockopt(ClientSocket, SOL_SOCKET, SO_KEEPALIVE, (char*)&opt_val, opt_len);
+	
 	if (ClientSocket == INVALID_SOCKET)
 	{
 		printf("[Socket] Error: %d\n", WSAGetLastError());
@@ -39,49 +46,145 @@ bool WinsockClient::ConnectToServer()
 	}
 
 	int numbytes;
-	const int size = 512;
-	char buf[size];
-	if ((numbytes = recv(ClientSocket, buf, size - 1, 0)) == -1)
+	if ((numbytes = recv(ClientSocket, recieveBuffer, RECIEVE_BUFFER_SIZE, 0)) == -1)
 	{
+		std::cout << "Socket error: " << WSAGetLastError() << std::endl;
 		perror("recv");
 		exit(1);
 	}
 
-	buf[numbytes] = '\0';
-	printf("Received '%s'\n", buf);
-
-
+	if (numbytes < RECIEVE_BUFFER_SIZE)
+	{
+		recieveBuffer[numbytes] = '\0';
+		printf("%s\n", recieveBuffer);
+	}
+	
+	// threading
+	receiveThread = std::thread(&WinsockClient::Recieve, this);
+	
 	return true;
 }
 
-void WinsockClient::Close() const
+void WinsockClient::Close()
 {
+	disconnect = true;
+
+	receiveThread.join();
+
 	closesocket(ClientSocket);
 	WSACleanup();
 }
 
-void WinsockClient::RequestMove(Vector2D pos, Vector2D dir)
+void WinsockClient::Recieve()
 {
+	MsgHead head;
+	while (!disconnect)
+	{
+		int bytesRecieved = recv(ClientSocket, recieveBuffer, RECIEVE_BUFFER_SIZE, 0);
+		if (bytesRecieved == SOCKET_ERROR)
+		{
+			std::cout << WSAGetLastError() << std::endl;
+			continue;
+		}
+
+		if (bytesRecieved > RECIEVE_BUFFER_SIZE)
+			continue;
+		
+		std::cout << "Received " << bytesRecieved << " bytes\n";
+		
+		for (int offset = 0; offset < bytesRecieved; offset += (int)head.length)
+		{
+			memcpy(&head, &recieveBuffer[0] + offset, sizeof MsgHead);
+			ReadBuffer(offset, head.length, head.type);
+		}
+	}
+}
+
+void WinsockClient::ReadChangeMsg(int offset, ChangeType type)
+{
+	std::cout << "1\n";
+	switch (type)
+	{
+		case ChangeType::NewPlayer: break;
+		case ChangeType::PlayerLeave: break;
+		
+		case ChangeType::NewPlayerPosition:
+		{
+				std::cout << "2\n";
+
+				NewPlayerPositionMsg posMsg;
+				memcpy(&posMsg, &recieveBuffer[0] + offset, sizeof NewPlayerPositionMsg);
+				std::cout << "3\n";
+
+				int x = ntohs(posMsg.dir.x);
+				int y = ntohs(posMsg.dir.y);
+				Vector2 newPos(x, y);
+				std::cout << "4\n";
+
+				this->moveCallback(newPos);
+		}
+		break;
+		default: ;
+	}
+}
+
+void WinsockClient::ReadBuffer(int offset, unsigned int length, MsgType msg)
+{
+	switch (msg)
+	{
+		case MsgType::Join:
+			std::cout << "Join\n";
+		
+			JoinMsg joinMsg;
+			memcpy(&joinMsg, &recieveBuffer[0] + offset, length);
+		break;
+		case MsgType::Leave: break;
+		case MsgType::Change:
+		{
+			std::cout << "Change\n";
+
+			ChangeMsg changeMsg;
+			memcpy(&changeMsg, &recieveBuffer[0] + offset, sizeof ChangeMsg);
+			ReadChangeMsg(offset, changeMsg.type);
+		}
+		break;
+		case MsgType::Event:
+
+		break;
+		case MsgType::TextMessage: break;
+		default: ;
+	}
+}
+
+
+void WinsockClient::RequestMove(Vector2 pos, Vector2 dir)
+{
+	// cast to char for each struct
+	// offset, length
+	 
 	MsgHead head =
 	{
-
+		sizeof MoveEvent,
+		sequence,
+		playerID,
+		MsgType::Event
 	};
+	
 	EventType type = { EventType::Move };
 	EventMsg msg = { head, type };
 
 	int posX = int(pos.X);
 	int posY = int(pos.Y);
-	Coordinate cPos = { posX, posY };
+	Coordinate cPos = { htons(posX), htons(posY) };
 
 	int dirX = int(dir.X);
 	int dirY = int(dir.Y);
-	Coordinate cDir = { dirX, dirY };
+	Coordinate cDir = { htons(dirX), htons(dirY) };
 
 	MoveEvent event = { msg, cPos, cDir };
 
-	char* buf = new char[sizeof event];
-	memcpy(&buf, &event, sizeof event);
-	send(ClientSocket, buf, sizeof buf, 0);
+	memcpy(&sendBuffer, &event, sizeof event);
+	send(ClientSocket, sendBuffer, sizeof event, 0);
 
-	delete[] buf;
+	sequence++;
 }

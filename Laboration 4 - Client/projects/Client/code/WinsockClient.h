@@ -7,13 +7,20 @@
 #include <iphlpapi.h>
 #include <cstdio>
 #include <string>
-#include "Vector2D.h"
+#include "Vector2.h"
+#include "CProtocol.h"
+#include <functional>
+#include <thread>
+#include <atomic>
 
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
 constexpr auto IP = "130.240.40.7";
+
+#define RECIEVE_BUFFER_SIZE 1024
+#define SEND_BUFFER_SIZE 512
 
 class WinsockClient
 {
@@ -24,18 +31,36 @@ private:
 	struct addrinfo* addressInfo; // retrieves data used to assign the socket
 	struct sockaddr_in serverAddr, senderInfo;
 
-	unsigned int PORT = 49152;
+	char sendBuffer[SEND_BUFFER_SIZE];
+	char recieveBuffer[RECIEVE_BUFFER_SIZE];
 
+	unsigned playerID = 0;
+	unsigned sequence = 0;
+
+	unsigned int PORT = 49152;
+	std::atomic<bool> disconnect = false;
+
+	std::thread receiveThread;
+	
+	std::function<void(Vector2&)> moveCallback;
+	
 public:
 
 	WinsockClient() = default;
 
 	bool ConnectToServer();
-	void Close() const;
+	void Close();
 
-	void RequestMove(Vector2D pos, Vector2D dir);
+	void Recieve();
+	void ReadChangeMsg(int offset, ChangeType type);
+	void ReadBuffer(int offset, unsigned length, MsgType msg);
 
-	~WinsockClient() = default;
+	void SetMoveCallback(const std::function<void(Vector2&)>& func) { this->moveCallback = func; }
+	
+	// Send
+	void RequestMove(Vector2 pos, Vector2 dir);
 
+	
+	~WinsockClient() { Close(); };
 };
 

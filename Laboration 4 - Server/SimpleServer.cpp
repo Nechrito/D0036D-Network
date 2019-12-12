@@ -3,9 +3,9 @@
 SimpleServer::SimpleServer()
 {
 	int opt = true;
-	int master_socket, addrlen, new_socket, client_socket[4], max_clients = 4, valread;
+	int master_socket, addrlen, new_socket, client_socket[4], max_clients = 4;
 
-	char buffer[1025];
+	char buffer[1024];
 	
 	struct sockaddr_in address;
 	
@@ -27,7 +27,7 @@ SimpleServer::SimpleServer()
 		perror("setsockopt");
 		exit(EXIT_FAILURE);
 	}
-
+		
 	// Configuring the socket
 	address.sin_family = AF_INET;
 	address.sin_addr.s_addr = INADDR_ANY;
@@ -98,7 +98,7 @@ SimpleServer::SimpleServer()
 			printf("New connection | Socket FD: %d | IP: %s | Port: %d\n" , new_socket , inet_ntoa(address.sin_addr) , ntohs (address.sin_port));
 
 			// Greets the client
-			char* message = "Connected!\r\n";
+			char* message = "Connected!\n";
 			if (send(new_socket, message, strlen(message), 0) != strlen(message))
 			{
 				perror("send");
@@ -123,8 +123,10 @@ SimpleServer::SimpleServer()
 
 			if (FD_ISSET(sd, &readfds))
 			{
+				int valread = read(sd, buffer, 1024);
+				
 				// Incoming message  
-				if ((valread = read(sd, buffer, 1024)) == 0)
+				if (valread == 0 || valread == -1)
 				{
 					// Client disconnected
 					getpeername(sd, (struct sockaddr*) & address, \
@@ -141,7 +143,8 @@ SimpleServer::SimpleServer()
 					//set the string terminating NULL byte on the end  
 					//of the data read  
 					buffer[valread] = '\0';
-					send(sd, buffer, strlen(buffer), 0);
+
+					send(sd, buffer, sizeof buffer, 0);
 				}
 			}
 		}

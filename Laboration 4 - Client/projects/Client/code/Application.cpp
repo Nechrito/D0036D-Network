@@ -4,7 +4,7 @@
 
 Application::Application() : window(nullptr)
 {
-	this->player = Layout(Color(0.24, 1, 1), Vector2D(-1 / quadSize, -1 / quadSize));
+	this->player = Layout(Color(0.24, 1, 1), Vector2(-1 / quadSize, -1 / quadSize));
 	this->quadCount = 20;
 	this->quadSize = 2.0f / float(quadCount);
 	this->isRefreshing = false;
@@ -32,23 +32,26 @@ bool Application::Open()
 
 		switch (button)
 		{
-			case 1: this->window->Close(); break;
+			case 1:
+				this->window->Close();
+				this->winsockClient.Close();
+			break;
 
 			case 17:
-				winsockClient.RequestMove(player.Position, Vector2D(0.0f, playerSpeed));
-				this->player.Position.Y += playerSpeed;
+				winsockClient.RequestMove(player.Position, Vector2(0.0f, playerSpeed));
+				//this->player.Position.Y += playerSpeed;
 				break;
 			case 30:
-				winsockClient.RequestMove(player.Position, Vector2D(-playerSpeed, 0.0f));
-				this->player.Position.X -= playerSpeed;
+				winsockClient.RequestMove(player.Position, Vector2(-playerSpeed, 0.0f));
+				//this->player.Position.X -= playerSpeed;
 				break;
 			case 31:
-				winsockClient.RequestMove(player.Position, Vector2D(0.0f, -playerSpeed));
-				this->player.Position.Y -= playerSpeed;
+				winsockClient.RequestMove(player.Position, Vector2(0.0f, -playerSpeed));
+				//this->player.Position.Y -= playerSpeed;
 				break;
 			case 32:
-				winsockClient.RequestMove(player.Position, Vector2D(playerSpeed, 0.0f));
-				this->player.Position.X += playerSpeed;
+				winsockClient.RequestMove(player.Position, Vector2(playerSpeed, 0.0f));
+				//this->player.Position.X += playerSpeed;
 				break;
 		}
 	});
@@ -61,6 +64,14 @@ void Application::Run()
 
 	RefreshTiles();
 
+	// typedef void (*func_t)(Vector2);
+	// void (Application::*func_p)(Vector2& pos) = &SetMovePos;
+	
+	winsockClient.SetMoveCallback([this] (Vector2 pos)
+	{
+		this->player.Position = pos;
+	});
+	
 	while (window->IsOpen())
 	{
 		// Clear screen
@@ -83,7 +94,7 @@ void Application::Run()
 			for (const Layout& layout : tiles)
 			{
 				Color color = layout.QuadColor;
-				Vector2D pos = layout.Position;
+				Vector2 pos = layout.Position;
 
 				glColor3f(color.R, color.G, color.B);
 
@@ -94,7 +105,7 @@ void Application::Run()
 			}
 
 			Color playerColor = player.QuadColor;
-			Vector2D playerPosition = player.Position;
+			Vector2 playerPosition = player.Position;
 			float playerSize = quadSize;
 
 			glColor3f(playerColor.R, playerColor.G, playerColor.B);
@@ -134,7 +145,7 @@ void Application::RefreshTiles()
 	{
 		for (int y = 0; y < quadCount; y++)
 		{
-			Vector2D position(-1 + x * quadSize, -1 + y * quadSize);
+			Vector2 position(-1 + x * quadSize, -1 + y * quadSize);
 			Color randomColor = GenerateColor();
 
 			tiles.emplace_back(randomColor, position);

@@ -80,6 +80,7 @@
     <ClCompile Include="SimpleServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CProtocol.h" />
     <ClInclude Include="SimpleServer.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
