@@ -16,10 +16,10 @@
 #define SO_KEEPALIVE 9
 #endif
 
-#include <stdio.h>  
-#include <string.h> 
-#include <stdlib.h>  
-#include <errno.h>  
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cerrno>
 #include <unistd.h>   
 #include <arpa/inet.h> 
 #include <sys/types.h>  
@@ -27,7 +27,10 @@
 #include <netinet/in.h>  
 #include <sys/time.h> 
 
-#define PORT 49152  
+constexpr auto PORT = 49152;
+
+constexpr auto BUFFER_SIZE = 1024;
+constexpr auto MAX_CLIENTS_ALLOWED = 4;
 
 class SimpleServer
 {

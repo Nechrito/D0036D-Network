@@ -1,6 +1,22 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
 
+#ifndef SOCKET_ERROR
+#define SOCKET_ERROR -1
+#endif
+
+#ifndef SOL_SOCKET
+#define SOL_SOCKET 1
+#endif
+
+#ifndef SO_REUSEADDR
+#define SO_REUSEADDR 2
+#endif
+
+#ifndef SO_KEEPALIVE
+#define SO_KEEPALIVE 9
+#endif
+
 #include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>

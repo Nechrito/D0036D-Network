@@ -12,13 +12,11 @@ bool WinsockClient::ConnectToServer()
 		printf("[WSAStartup] Error: %d\n", result);
 		return false;
 	}
-
 	
 	ClientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	
-	int opt_val = 1;
-	int opt_len = sizeof(int);
-	setsockopt(ClientSocket, SOL_SOCKET, SO_KEEPALIVE, (char*)&opt_val, opt_len);
+	bool option = true;
+	setsockopt(ClientSocket, SOL_SOCKET, SO_KEEPALIVE, (char*)&option, sizeof option);
 	
 	if (ClientSocket == INVALID_SOCKET)
 	{
@@ -35,8 +33,11 @@ bool WinsockClient::ConnectToServer()
 
 	inet_ntop(AF_INET, &serverAddr.sin_addr, str, INET_ADDRSTRLEN);
 	printf("%s\n", str);
-
+	
 	result = connect(ClientSocket, (sockaddr*)&serverAddr, sizeof serverAddr);
+
+	printf("Connect Result: %d\n", result);
+
 	if (result)
 	{
 		printf("[getaddrinfo] Error: %d\n", WSAGetLastError());
@@ -46,7 +47,8 @@ bool WinsockClient::ConnectToServer()
 	}
 
 	int numbytes;
-	if ((numbytes = recv(ClientSocket, recieveBuffer, RECIEVE_BUFFER_SIZE, 0)) == -1)
+	result = numbytes = recv(ClientSocket, recieveBuffer, RECIEVE_BUFFER_SIZE, 0);
+	if (result == -1)
 	{
 		std::cout << "Socket error: " << WSAGetLastError() << std::endl;
 		perror("recv");
